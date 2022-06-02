@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Container, Draggable } from 'react-smooth-dnd'
 
 import { isEmpty } from 'lodash'
 
@@ -14,7 +15,7 @@ function BoardContent() {
 
   useEffect(() => {
     const boardFromDB = initialData.boards.find(
-      (board) => board.id === 'board-1',
+      (board) => board.id === 'board-1'
     )
     if (boardFromDB) {
       setBoard(boardFromDB)
@@ -30,11 +31,29 @@ function BoardContent() {
     )
   }
 
+  const onColumnDrop = (dropResult) => {
+    console.log(dropResult)
+  }
+
   return (
     <div className="board-content">
-      {columns.map((column, index) => (
-        <Column key={index} column={column} />
-      ))}
+      <Container
+        orientation="horizontal"
+        onDrop={onColumnDrop}
+        getChildPayload={index => columns[index]}
+        dragHandleSelector=".column-drag-handle"
+        dropPlaceholder={{
+          animationDuration: 150,
+          showOnTop: true,
+          className: 'column-drop-preview'
+        }}
+      >
+        {columns.map((column, index) => (
+          <Draggable key={index}>
+            <Column column={column} />
+          </Draggable>
+        ))}
+      </Container>
     </div>
   )
 }
