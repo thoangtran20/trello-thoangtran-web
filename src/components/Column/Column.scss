@@ -33,7 +33,7 @@ $list-bg-color: #ebecf0;
     border-bottom-left-radius: $column-border-radius;
     border-bottom-right-radius: $column-border-radius;
   }
-  ul.task-list {
+  ul.card-list {
     list-style-type: none;
     margin: 0;
     max-height: calc(
@@ -50,6 +50,5 @@ $list-bg-color: #ebecf0;
       background-color: darken($list-bg-color, 15);
       border-right: 5px $list-bg-color solid;
     }
-   
   }
 }
