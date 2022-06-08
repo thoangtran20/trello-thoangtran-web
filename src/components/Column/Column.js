@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash'
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
 import {
   saveContentAfterPressEnter,
-  selectAllInlineText
+  selectAllInlineText,
 } from 'utilities/contentEditable'
 import './Column.scss'
 import Card from 'components/Card/Card'
@@ -45,7 +45,7 @@ function Column(props) {
     if (type === MODAL_ACTION_CONFIRM) {
       const newColumn = {
         ...column,
-        _destroy: true
+        _destroy: true,
       }
       onUpdateColumn(newColumn)
     }
@@ -55,7 +55,7 @@ function Column(props) {
   const handleColumnTitleBlur = () => {
     const newColumn = {
       ...column,
-      title: columnTitle
+      title: columnTitle,
     }
     onUpdateColumn(newColumn)
   }
@@ -71,7 +71,7 @@ function Column(props) {
       boardId: column.boardId,
       columnId: column.id,
       title: newCardTitle.trim(),
-      cover: null
+      cover: null,
     }
 
     let newColumn = cloneDeep(column)
@@ -81,7 +81,6 @@ function Column(props) {
     onUpdateColumn(newColumn)
     setNewCardTitle('')
     toggleOpenNewCardForm()
-
   }
 
   return (
@@ -110,7 +109,9 @@ function Column(props) {
             />
 
             <Dropdown.Menu>
-              <Dropdown.Item>Add card...</Dropdown.Item>
+              <Dropdown.Item onClick={toggleOpenNewCardForm}>
+                Add card...
+              </Dropdown.Item>
               <Dropdown.Item onClick={toggleShowConfirmModal}>
                 Remove column...
               </Dropdown.Item>
@@ -135,7 +136,7 @@ function Column(props) {
           dropPlaceholder={{
             animationDuration: 150,
             showOnTop: true,
-            className: 'card-drop-preview'
+            className: 'card-drop-preview',
           }}
           dropPlaceholderAnimationDuration={200}
         >
